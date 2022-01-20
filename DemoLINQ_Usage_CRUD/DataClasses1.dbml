@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="vizagdb" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.tblStudent" Member="tblStudents">
+    <Type Name="tblStudent">
+      <Column Name="studId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="studName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="studMobile" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="studAge" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="studGender" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblJob" Member="tblJobs">
+    <Type Name="tblJob">
+      <Column Name="jcode" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="jname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tblJob_tbl_Emp" Member="tbl_Emps" ThisKey="jcode" OtherKey="jcode" Type="tbl_Emp" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_location" Member="tbl_locations">
+    <Type Name="tbl_location">
+      <Column Name="loccode" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="locname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="tbl_location_tbl_Dept" Member="tbl_Depts" ThisKey="loccode" OtherKey="lcode" Type="tbl_Dept" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Dept" Member="tbl_Depts">
+    <Type Name="tbl_Dept">
+      <Column Name="deptno" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="dname" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="lcode" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_Dept_tbl_Emp" Member="tbl_Emps" ThisKey="deptno" OtherKey="DEPTNO" Type="tbl_Emp" />
+      <Association Name="tbl_location_tbl_Dept" Member="tbl_location" ThisKey="lcode" OtherKey="loccode" Type="tbl_location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Emp" Member="tbl_Emps">
+    <Type Name="tbl_Emp">
+      <Column Name="empno" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ename" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="jcode" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="mgrno" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="hiredate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="salary" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="commission" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DEPTNO" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_Dept_tbl_Emp" Member="tbl_Dept" ThisKey="DEPTNO" OtherKey="deptno" Type="tbl_Dept" IsForeignKey="true" />
+      <Association Name="tblJob_tbl_Emp" Member="tblJob" ThisKey="jcode" OtherKey="jcode" Type="tblJob" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
